@@ -1,13 +1,13 @@
-<!DOCTYPE html><html lang="pt-BR">
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Escolha com sabedoria</title>
   <style>
     * { box-sizing: border-box; }
     html, body {
-      margin: 0;
-      padding: 0;
+      margin: 0; padding: 0;
       background-color: #111;
       color: #fff;
       font-family: Arial, sans-serif;
@@ -38,6 +38,8 @@
       gap: 20px;
       z-index: 3;
       flex-wrap: wrap;
+      position: relative;
+      bottom: 30px;
     }
     button {
       padding: 15px 30px;
@@ -55,11 +57,14 @@
       background-color: #4caf50;
       color: white;
       z-index: 3;
+      position: relative;
+      transition: left 0.3s ease;
     }
     #noBtn {
       background-color: #2196f3;
       color: white;
       z-index: 3;
+      position: relative;
     }
     .popup {
       display: none;
@@ -92,46 +97,64 @@
 </head>
 <body>
   <div class="container">
-    <img src="https://i.pinimg.com/736x/9c/36/a8/9c36a8e4979816cea407cfd5d604b37c.jpg" alt="Imagem Central">
+    <img src="https://i.pinimg.com/736x/9c/36/a8/9c36a8e4979816cea407cfd5d604b37c.jpg" alt="Imagem Central" />
     <div class="buttons">
       <button id="yesBtn">Sim</button>
       <button id="noBtn">Não</button>
     </div>
-  </div>  <div class="popup" id="popup">
-    <img src="https://media.tenor.com/dDor8DLYWKYAAAAj/cachorro-funk-cachorro-dan%C3%A7ante.gif" alt="GIF engraçado">
+  </div>
+
+  <div class="popup" id="popup">
+    <img src="https://media.tenor.com/dDor8DLYWKYAAAAj/cachorro-funk-cachorro-dan%C3%A7ante.gif" alt="GIF engraçado" />
     <div class="message">
       Ótima escolha. Prepare o c*zinho que hoje ele é meu 😈
     </div>
-  </div>  <script>
+  </div>
+
+  <script>
     const yesBtn = document.getElementById('yesBtn');
     const noBtn = document.getElementById('noBtn');
     const popup = document.getElementById('popup');
 
     const messages = [
-      "Opa!",
-      "Tem certeza disso?",
-      "Acho melhor pensar direito...",
-      "Está muito precipitada",
-      "Tente novamente mais tarde",
-      "Vai mesmo ficar regulando?",
-      "Dá logo esse negócio, mulher",
-      "Faz isso não comigo 😢",
-      "Não brinque com meu coração 💔",
-      "Vai se arrepender hein!",
-      "Me escolhe vai 🥺",
-      "A vida é curta demais pra dizer não",
-      "Topa que depois melhora! 😏",
-      "Diz sim logo, pô!",
-      "Não resista aos encantos desse botão 🔵"
+      "Booora",
+      "Tem algo piscando por aí... será o destino ou outra coisa? 👀",
+      "Dá pra mim, deliciosa 😏👌🏽",
+      "Seu precioso já assinou o contrato, só falta você clicar 😏",
+      "Bote na minha que eu prometo cuidar bem dele 🤭",
+      "Tá regulando o que é nosso por direito? 😤",
+      "Vai me deixar assim mesmo, minha parceira?",
+      "Libera o toin que eu te dou 10 conto 😎",
+      "Dá esse presentinho vai... o universo agradece 🎁",
+      "Tô aqui só esperando aquele sim de trás 🫣",
+      "Pfvr, nunca te pedi nada 🥲",
+      "Prometo que nao peço mais nada esse ano 😏",
+      "Clica logo no sim, vai 😌",
+      "Prometo ir devagarinho 🥺",
+      "Vai dizer não pra essa oportunidade? 🤨",
+      "Força, sua mãe não te fez fraca"
     ];
 
-    function getRandomMessage() {
-      const randomIndex = Math.floor(Math.random() * messages.length);
-      return messages[randomIndex];
-    }
+    let msgIndex = 0;
 
     function cycleMessage() {
-      noBtn.textContent = getRandomMessage();
+      noBtn.textContent = messages[msgIndex];
+      msgIndex = (msgIndex + 1) % messages.length;
+      adjustYesBtnPosition();
+    }
+
+    function adjustYesBtnPosition() {
+      // Se o botão Não estiver muito largo, empurra o Sim para a direita pra caber na tela
+      const buttonsContainer = noBtn.parentElement;
+      const totalWidth = buttonsContainer.offsetWidth;
+      const noBtnRight = noBtn.getBoundingClientRect().right;
+      const viewportWidth = window.innerWidth;
+
+      if (noBtnRight + yesBtn.offsetWidth + 40 > viewportWidth) {
+        yesBtn.style.left = (viewportWidth - noBtnRight - yesBtn.offsetWidth - 40) + 'px';
+      } else {
+        yesBtn.style.left = '0px';
+      }
     }
 
     noBtn.addEventListener('mouseenter', cycleMessage);
@@ -143,5 +166,10 @@
     yesBtn.addEventListener('click', () => {
       popup.style.display = 'flex';
     });
-  </script></body>
+
+    // Ajusta posição ao carregar e redimensionar tela
+    window.addEventListener('resize', adjustYesBtnPosition);
+    window.addEventListener('load', adjustYesBtnPosition);
+  </script>
+</body>
 </html>
