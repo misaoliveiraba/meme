@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Escolha com sabedoria</title>
+  <style>
+    body {
+      background-color: #111;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .container {
+      margin-top: 50px;
+    }
+
+    img {
+      width: 600px;
+      height: 600px;
+      object-fit: cover;
+      border-radius: 20px;
+    }
+
+    .buttons {
+      margin-top: 20px;
+    }
+
+    button {
+      padding: 15px 30px;
+      margin: 10px;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #yesBtn {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    #noBtn {
+      background-color: #f44336;
+      color: white;
+      position: absolute;
+    }
+
+    /* Popup */
+    .popup {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.9);
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .popup img {
+      width: 300px;
+    }
+
+    .message {
+      font-size: 24px;
+      color: #fff;
+      animation: blink 0.6s infinite alternate;
+      margin-top: 20px;
+    }
+
+    @keyframes blink {
+      from { opacity: 1; }
+      to { opacity: 0.1; }
+    }
+
+    .fireworks {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .firework {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: yellow;
+      animation: explode 1s ease-out forwards;
+    }
+
+    @keyframes explode {
+      to {
+        transform: translate(
+          calc(var(--x) * 1px),
+          calc(var(--y) * 1px)
+        );
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="https://i.pinimg.com/736x/9c/36/a8/9c36a8e4979816cea407cfd5d604b37c.jpg" alt="Imagem Central">
+    <div class="buttons">
+      <button id="yesBtn">Sim</button>
+      <button id="noBtn">Não</button>
+    </div>
+  </div>
+
+  <div class="popup" id="popup">
+    <img src="https://media.tenor.com/dDor8DLYWKYAAAAj/cachorro-funk-cachorro-dan%C3%A7ante.gif" alt="GIF engraçado">
+    <div class="message">Ótima escolha. Prepare o c*zinho que hoje ele é meu 😈</div>
+  </div>
+
+  <div class="fireworks" id="fireworks"></div>
+
+  <script>
+    const yesBtn = document.getElementById('yesBtn');
+    const noBtn = document.getElementById('noBtn');
+    const popup = document.getElementById('popup');
+    const fireworks = document.getElementById('fireworks');
+
+    const messages = [
+      "Opa", "Tem certeza disso?", "Acho melhor pensar direito",
+      "Está muito precipitada", "Tente novamente mais tarde",
+      "Vai mesmo ficar regulando?", "Dá logo esse negócio, mulher", "Não"
+    ];
+    let msgIndex = 0;
+
+    noBtn.style.top = '80%';
+    noBtn.style.left = '45%';
+
+    function moveNoBtn() {
+      const x = Math.random() * (window.innerWidth - 150);
+      const y = Math.random() * (window.innerHeight - 100);
+      noBtn.style.left = `${x}px`;
+      noBtn.style.top = `${y}px`;
+      noBtn.textContent = messages[msgIndex];
+      msgIndex = (msgIndex + 1) % messages.length;
+    }
+
+    noBtn.addEventListener('mouseover', moveNoBtn);
+
+    yesBtn.addEventListener('click', () => {
+      popup.style.display = 'flex';
+      for (let i = 0; i < 100; i++) {
+        const fw = document.createElement('div');
+        fw.classList.add('firework');
+        fw.style.left = Math.random() * 100 + '%';
+        fw.style.top = Math.random() * 100 + '%';
+        fw.style.setProperty('--x', (Math.random() - 0.5) * 600);
+        fw.style.setProperty('--y', (Math.random() - 0.5) * 600);
+        fireworks.appendChild(fw);
+        setTimeout(() => fw.remove(), 1000);
+      }
+    });
+  </script>
+</body>
+</html>
