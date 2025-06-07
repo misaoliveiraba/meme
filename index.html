@@ -57,17 +57,16 @@
       white-space: normal;
       user-select: none;
       transition: all 0.3s ease;
+      position: relative;
     }
     #yesBtn {
       background-color: #4caf50;
       color: white;
-      position: relative;
       left: 0;
     }
     #noBtn {
       background-color: #2196f3;
       color: white;
-      position: relative;
     }
     .popup {
       display: none;
@@ -150,16 +149,19 @@
     }
 
     function adjustYesBtnPosition() {
-      // Ajusta o botão Sim se o botão Não estiver grande demais para caber na tela
       const buttonsContainer = noBtn.parentElement;
-      const totalWidth = buttonsContainer.offsetWidth;
+      const viewportWidth = window.innerWidth;
       const noBtnRect = noBtn.getBoundingClientRect();
       const yesBtnWidth = yesBtn.offsetWidth;
-      const viewportWidth = window.innerWidth;
 
-      if (noBtnRect.right + yesBtnWidth + 20 > viewportWidth) {
-        const overflow = noBtnRect.right + yesBtnWidth + 20 - viewportWidth;
-        yesBtn.style.left = `-${overflow}px`;
+      // Calcula se o botão "Não" + botão "Sim" vão ultrapassar a tela pela direita
+      const totalWidthNeeded = noBtnRect.right + yesBtnWidth + 20;
+
+      if (totalWidthNeeded > viewportWidth) {
+        // Move o botão "Sim" para esquerda para caber, mas sem ultrapassar a margem esquerda (0)
+        const overflow = totalWidthNeeded - viewportWidth;
+        const leftPos = Math.max(-overflow, 0);
+        yesBtn.style.left = `${leftPos}px`;
       } else {
         yesBtn.style.left = '0px';
       }
@@ -176,9 +178,7 @@
     });
 
     window.addEventListener('resize', adjustYesBtnPosition);
-    window.addEventListener('load', () => {
-      adjustYesBtnPosition();
-    });
+    window.addEventListener('load', adjustYesBtnPosition);
   </script>
 </body>
 </html>
