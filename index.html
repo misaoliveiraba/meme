@@ -5,46 +5,49 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Escolha com sabedoria</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       background-color: #111;
       color: #fff;
       font-family: Arial, sans-serif;
-      text-align: center;
       margin: 0;
       padding: 0;
-      overflow: hidden;
+      text-align: center;
+      overflow-x: hidden;
     }
 
     .container {
-      margin-top: 50px;
+      margin-top: 30px;
+      padding: 0 16px;
     }
 
     .container img {
-      width: 700px;
+      width: 100%;
+      max-width: 700px;
       height: auto;
-      max-width: 95vw;
-      max-height: 95vh;
-      object-fit: cover;
       border-radius: 20px;
     }
 
     .buttons {
-      margin-top: 20px;
+      margin-top: 30px;
       display: flex;
       justify-content: center;
+      gap: 16px;
       flex-wrap: wrap;
     }
 
     button {
-      padding: 25px 50px;
-      margin: 10px;
-      font-size: 24px;
+      padding: 20px 30px;
+      font-size: 20px;
       border: none;
       border-radius: 10px;
       cursor: pointer;
       transition: 0.3s;
-      min-width: 180px;
-      min-height: 70px;
+      min-width: 120px;
+      flex-shrink: 0;
     }
 
     #yesBtn {
@@ -56,9 +59,10 @@
       background-color: #f44336;
       color: white;
       position: absolute;
-      top: 80%;
+      top: 85%;
       left: 45%;
-      transition: top 0.2s, left 0.2s;
+      transition: top 0.25s, left 0.25s;
+      z-index: 10;
     }
 
     .popup {
@@ -76,23 +80,21 @@
     }
 
     .popup img {
-      width: 600px;
-      max-width: 90vw;
-      max-height: 90vh;
+      width: 90vw;
+      max-width: 600px;
     }
 
     .message {
-      font-size: 32px;
+      font-size: 28px;
       color: #fff;
       animation: blink 0.6s infinite alternate;
       margin-top: 20px;
-      text-align: center;
-      padding: 0 10px;
+      padding: 0 12px;
     }
 
     @keyframes blink {
       from { opacity: 1; }
-      to { opacity: 0.1; }
+      to { opacity: 0.2; }
     }
 
     .fireworks {
@@ -122,30 +124,19 @@
       }
     }
 
-    @media (max-width: 650px) {
-      .container img {
-        width: 90vw;
-        height: auto;
-      }
-
-      .buttons {
-        flex-direction: column;
-        gap: 10px;
-      }
-
+    @media (max-width: 500px) {
       button {
-        width: 80vw;
-        font-size: 24px;
-        padding: 25px;
-        min-height: 80px;
-      }
-
-      .popup img {
-        width: 90vw;
+        font-size: 16px;
+        padding: 15px 20px;
+        min-width: 100px;
       }
 
       .message {
-        font-size: 28px;
+        font-size: 22px;
+      }
+
+      .popup img {
+        width: 100%;
       }
     }
   </style>
@@ -177,10 +168,8 @@
       "Está muito precipitada", "Tente novamente mais tarde",
       "Vai mesmo ficar regulando?", "Dá logo esse negócio, mulher", "Não"
     ];
-    let msgIndex = 0;
 
-    noBtn.style.top = '80%';
-    noBtn.style.left = '45%';
+    let msgIndex = 0;
 
     function moveNoBtn() {
       const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
@@ -192,7 +181,7 @@
       msgIndex++;
       if (msgIndex >= messages.length) {
         msgIndex = 0;
-        noBtn.style.top = '80%';
+        noBtn.style.top = '85%';
         noBtn.style.left = '45%';
         noBtn.textContent = messages[msgIndex];
       }
