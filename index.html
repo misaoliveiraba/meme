@@ -30,10 +30,15 @@
       z-index: 1;
     }
     .buttons {
-      margin-top: 20px;
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
       display: flex;
+      justify-content: center;
+      align-items: center;
       gap: 20px;
-      z-index: 2;
+      z-index: 3;
     }
     button {
       padding: 15px 30px;
@@ -53,8 +58,8 @@
     #noBtn {
       background-color: #f44336;
       color: white;
-      position: absolute;
-      z-index: 4;
+      position: relative;
+      z-index: 3;
       white-space: nowrap;
     }
     .popup {
@@ -90,11 +95,13 @@
     <img src="https://i.pinimg.com/736x/9c/36/a8/9c36a8e4979816cea407cfd5d604b37c.jpg" alt="Imagem Central">
     <div class="buttons">
       <button id="yesBtn">Sim</button>
+      <button id="noBtn">Não</button>
     </div>
-    <button id="noBtn">Não</button>
   </div>  <div class="popup" id="popup">
     <img src="https://media.tenor.com/dDor8DLYWKYAAAAj/cachorro-funk-cachorro-dan%C3%A7ante.gif" alt="GIF engraçado">
-    <div class="message">Ótima escolha. Prepare o c*zinho que hoje ele é meu 😈</div>
+    <div class="message">
+      Ótima escolha. Prepare o c*zinho que hoje ele é meu 😈
+    </div>
   </div>  <script>
     const yesBtn = document.getElementById('yesBtn');
     const noBtn = document.getElementById('noBtn');
@@ -118,6 +125,7 @@
       const x = Math.random() * (viewportWidth - btnWidth);
       const y = Math.random() * (viewportHeight - btnHeight);
 
+      noBtn.style.position = 'absolute';
       noBtn.style.left = `${x}px`;
       noBtn.style.top = `${y}px`;
       noBtn.textContent = messages[msgIndex];
