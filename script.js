@@ -10,7 +10,6 @@ const messages = [
 ];
 let msgIndex = 0;
 
-// Inicial posicionamento do botão NÃO
 noBtn.style.top = '80%';
 noBtn.style.left = '45%';
 
@@ -24,24 +23,21 @@ function moveNoBtn() {
   msgIndex++;
   if (msgIndex >= messages.length) {
     msgIndex = 0;
-    // Voltar pro lugar inicial
     noBtn.style.top = '80%';
     noBtn.style.left = '45%';
     noBtn.textContent = messages[msgIndex];
   }
 }
 
-// Rápido no celular (touch) e também no hover desktop
 noBtn.addEventListener('mouseover', moveNoBtn);
 noBtn.addEventListener('touchstart', (e) => {
-  e.preventDefault(); // evita clique e scroll
+  e.preventDefault();
   moveNoBtn();
 });
 
 yesBtn.addEventListener('click', () => {
   popup.style.display = 'flex';
 
-  // Cria fogos de artifício
   for (let i = 0; i < 100; i++) {
     const fw = document.createElement('div');
     fw.classList.add('firework');
