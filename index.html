@@ -110,7 +110,7 @@
   </div>
 
   <div class="popup" id="popup">
-    <img src="https://media.tenor.com/dDor8DLYWKYAAAAj/cachorro-funk-cachorro-dan%C3%A7ante.gif" alt="GIF engraçado" />
+    <img src="https://media1.tenor.com/m/oXE-MilclX8AAAAd/sherek-brasil.gif" alt="GIF engraçado" />
     <div class="message">
       Ótima escolha. Prepare o c*zinho que hoje ele é meu 😈
     </div>
@@ -122,8 +122,8 @@
     const popup = document.getElementById('popup');
 
     const messages = [
-      "Booora",
-      "Tem algo piscando por aí... será o destino ou outra coisa? 👀",
+      "Tente novamente",
+      "Tá com medo de quê? 👀",
       "Dá pra mim, deliciosa 😏👌🏽",
       "Seu precioso já assinou o contrato, só falta você clicar 😏",
       "Bote na minha que eu prometo cuidar bem dele 🤭",
@@ -154,11 +154,9 @@
       const noBtnRect = noBtn.getBoundingClientRect();
       const yesBtnWidth = yesBtn.offsetWidth;
 
-      // Calcula se o botão "Não" + botão "Sim" vão ultrapassar a tela pela direita
       const totalWidthNeeded = noBtnRect.right + yesBtnWidth + 20;
 
       if (totalWidthNeeded > viewportWidth) {
-        // Move o botão "Sim" para esquerda para caber, mas sem ultrapassar a margem esquerda (0)
         const overflow = totalWidthNeeded - viewportWidth;
         const leftPos = Math.max(-overflow, 0);
         yesBtn.style.left = `${leftPos}px`;
