@@ -37,6 +37,7 @@
       justify-content: center;
       gap: 16px;
       flex-wrap: wrap;
+      position: relative;
     }
 
     button {
@@ -58,11 +59,6 @@
     #noBtn {
       background-color: #f44336;
       color: white;
-      position: absolute;
-      top: 85%;
-      left: 45%;
-      transition: top 0.25s, left 0.25s;
-      z-index: 10;
     }
 
     .popup {
@@ -170,8 +166,14 @@
     ];
 
     let msgIndex = 0;
+    let noBtnFloating = false;
 
     function moveNoBtn() {
+      if (!noBtnFloating) {
+        noBtnFloating = true;
+        noBtn.style.position = 'absolute';
+      }
+
       const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
       const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
       noBtn.style.left = `${x}px`;
@@ -181,8 +183,10 @@
       msgIndex++;
       if (msgIndex >= messages.length) {
         msgIndex = 0;
-        noBtn.style.top = '85%';
-        noBtn.style.left = '45%';
+        noBtn.style.left = '';
+        noBtn.style.top = '';
+        noBtn.style.position = 'static';
+        noBtnFloating = false;
         noBtn.textContent = messages[msgIndex];
       }
     }
