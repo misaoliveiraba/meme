@@ -178,7 +178,8 @@
 
     noBtn.addEventListener('click', () => {
       speechBubble.textContent = messages[msgIndex];
-      speechBubble.classList.add('visible');
+      speechBubble.style.opacity = '1';
+      speechBubble.style.pointerEvents = 'auto';
       msgIndex = (msgIndex + 1) % messages.length;
     });
 
