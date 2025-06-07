@@ -1,79 +1,61 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+<!DOCTYPE html><html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Escolha com sabedoria</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
     html, body {
-      margin: 0; padding: 0;
+      margin: 0;
+      padding: 0;
       background-color: #111;
       color: #fff;
       font-family: Arial, sans-serif;
       height: 100vh;
-      overflow: hidden; /* Sem scroll vertical */
+      overflow: hidden;
     }
     .container {
-      height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding: 16px;
+      height: 100vh;
       text-align: center;
+      position: relative;
     }
     .container img {
       width: 100%;
-      max-width: 700px;
-      height: auto;
+      max-width: 600px;
       border-radius: 20px;
+      z-index: 1;
     }
     .buttons {
-      margin-top: 30px;
-      position: relative;
-      width: 100%;
-      max-width: 500px;
-      height: 80px;
+      margin-top: 20px;
       display: flex;
-      justify-content: center;
-      align-items: center;
-      user-select: none;
+      gap: 20px;
+      z-index: 2;
     }
     button {
-      padding: 20px 30px;
+      padding: 15px 30px;
       font-size: 20px;
       border: none;
       border-radius: 10px;
       cursor: pointer;
       min-width: 120px;
-      transition: background-color 0.3s;
-      user-select: none;
+      transition: all 0.3s;
     }
     #yesBtn {
       background-color: #4caf50;
       color: white;
-      position: relative; /* fixo */
-      margin-right: 16px;
-      z-index: 2;
+      position: relative;
+      z-index: 3;
     }
     #noBtn {
       background-color: #f44336;
       color: white;
       position: absolute;
-      top: 0;
-      right: 0;
-      width: 120px;
-      height: 56px;
-      line-height: 36px;
-      z-index: 3;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      z-index: 4;
       white-space: nowrap;
-      padding: 0 15px;
     }
     .popup {
       display: none;
@@ -86,176 +68,64 @@
       align-items: center;
       flex-direction: column;
       padding: 20px;
-      box-sizing: border-box;
     }
     .popup img {
-      width: 90vw;
+      width: 100%;
       max-width: 600px;
       border-radius: 15px;
     }
     .message {
       font-size: 28px;
-      color: #fff;
       animation: blink 0.6s infinite alternate;
       margin-top: 20px;
-      padding: 0 12px;
-      text-align: center;
     }
     @keyframes blink {
       from { opacity: 1; }
-      to { opacity: 0.2; }
-    }
-    .fireworks {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 1;
-      top: 0; left: 0;
-    }
-    .firework {
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: yellow;
-      animation: explode 1s ease-out forwards;
-    }
-    @keyframes explode {
-      to {
-        transform: translate(calc(var(--x) * 1px), calc(var(--y) * 1px));
-        opacity: 0;
-      }
-    }
-    @media (max-width: 500px) {
-      button {
-        font-size: 16px;
-        padding: 15px 20px;
-        min-width: 100px;
-      }
-      .message {
-        font-size: 22px;
-      }
-      .popup img {
-        width: 100%;
-      }
-      #noBtn {
-        width: 100px;
-        height: 50px;
-        padding: 0 10px;
-      }
-      #yesBtn {
-        min-width: 100px;
-        padding: 15px 20px;
-      }
-      .buttons {
-        max-width: 320px;
-        height: 70px;
-      }
+      to { opacity: 0.3; }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <img src="https://i.pinimg.com/736x/9c/36/a8/9c36a8e4979816cea407cfd5d604b37c.jpg" alt="Imagem Central" />
+    <img src="https://i.pinimg.com/736x/9c/36/a8/9c36a8e4979816cea407cfd5d604b37c.jpg" alt="Imagem Central">
     <div class="buttons">
       <button id="yesBtn">Sim</button>
-      <button id="noBtn">Não</button>
     </div>
-  </div>
-
-  <div class="popup" id="popup">
-    <img src="https://media.tenor.com/dDor8DLYWKYAAAAj/cachorro-funk-cachorro-dan%C3%A7ante.gif" alt="GIF engraçado" />
+    <button id="noBtn">Não</button>
+  </div>  <div class="popup" id="popup">
+    <img src="https://media.tenor.com/dDor8DLYWKYAAAAj/cachorro-funk-cachorro-dan%C3%A7ante.gif" alt="GIF engraçado">
     <div class="message">Ótima escolha. Prepare o c*zinho que hoje ele é meu 😈</div>
-  </div>
-
-  <div class="fireworks" id="fireworks"></div>
-
-  <script>
+  </div>  <script>
     const yesBtn = document.getElementById('yesBtn');
     const noBtn = document.getElementById('noBtn');
     const popup = document.getElementById('popup');
-    const fireworks = document.getElementById('fireworks');
-    const buttonsContainer = document.querySelector('.buttons');
 
     const messages = [
-      "Opa!",
-      "Tem certeza disso?",
-      "Acho melhor pensar direito...",
-      "Tá se fazendo de difícil 😏",
-      "Ainda dá tempo de mudar de ideia!",
-      "Tá se valorizando demais, hein?",
-      "Ui, que difícil ela!",
-      "Me dá só um pedacinho 😈",
-      "Tá fugindo por quê?",
-      "Vem cá, sua linda!",
-      "Se correr é pior 😼",
-      "Não foge do prazer!",
-      "Aceita logo vai...",
-      "Nem tá tudo isso 😜",
-      "Tá achando que é quem?",
-      "Me iludiu à toa...",
-      "Jura que vai dizer não?",
-      "Vai me deixar na mão?",
-      "Dá uma chance pro amor ❤️",
-      "Fingindo costume né?",
-      "É só um botãozinho inocente...",
-      "Resistência é inútil 😎",
-      "Fala que me quer logo!",
-      "Não finge que não gostou!",
-      "Ai que vontade de clicar em você 😩",
-      "Você me provoca 😳",
-      "Não seja tímida...",
-      "Dá uma clicadinha vai!",
-      "Faz isso comigo não!",
-      "Não? Jura mesmo? 🙄",
-      "Pense bem... MUITO bem...",
-      "Só mais uma tentativinha...",
-      "Tá calor aqui ou é você?",
-      "Fica não... Volta 😢",
-      "Coração partido 💔",
-      "Derrubei até o botão de tanto sofrer 🥹",
-      "Vamos conversar... sem roupa 🫣",
-      "Não seja cruel comigo 😭",
-      "Me chama de botão e me aperta",
-      "Não adianta correr 😼",
-      "Última chance hein...",
-      "Tá difícil resistir né?",
-      "Se clicar, promete não se apaixonar?",
-      "Dá esse botãozão gostoso!"
+      "Opa!", "Tem certeza disso?", "Acho melhor pensar direito...",
+      "Dá uma chance pro amor ❤️", "Ui, que difícil ela!", "Não seja cruel comigo 😭",
+      "Fala que me quer logo!", "Me chama de botão e me aperta", "Vai me deixar na mão?",
+      "Dá logo esse negócio, mulher", "Resistência é inútil 😎"
     ];
 
     let msgIndex = 0;
 
     function moveNoBtn() {
-      const maxX = buttonsContainer.clientWidth - noBtn.offsetWidth;
-      const maxY = buttonsContainer.clientHeight - noBtn.offsetHeight;
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+      const btnWidth = noBtn.offsetWidth;
+      const btnHeight = noBtn.offsetHeight;
 
-      const yesBtnWidth = yesBtn.offsetWidth;
-      const marginRight = 16; // margem no CSS
-      const minX = yesBtnWidth + marginRight + 10;
-
-      // Calcula posição aleatória para não encostar no botão Sim
-      const x = minX + Math.random() * (maxX - minX);
-      const y = Math.random() * maxY;
+      const x = Math.random() * (viewportWidth - btnWidth);
+      const y = Math.random() * (viewportHeight - btnHeight);
 
       noBtn.style.left = `${x}px`;
       noBtn.style.top = `${y}px`;
-      noBtn.style.right = 'auto';
-
       noBtn.textContent = messages[msgIndex];
 
-      msgIndex++;
-      if (msgIndex >= messages.length) {
-        msgIndex = 0;
-        noBtn.style.left = '';
-        noBtn.style.top = '';
-        noBtn.style.right = '0'; // volta pro canto direito
-        noBtn.textContent = "Não";
-      }
+      msgIndex = (msgIndex + 1) % messages.length;
     }
 
-    noBtn.addEventListener('mouseover', moveNoBtn);
+    noBtn.addEventListener('mouseenter', moveNoBtn);
     noBtn.addEventListener('touchstart', (e) => {
       e.preventDefault();
       moveNoBtn();
@@ -263,18 +133,6 @@
 
     yesBtn.addEventListener('click', () => {
       popup.style.display = 'flex';
-
-      for (let i = 0; i < 100; i++) {
-        const fw = document.createElement('div');
-        fw.classList.add('firework');
-        fw.style.left = Math.random() * 100 + '%';
-        fw.style.top = Math.random() * 100 + '%';
-        fw.style.setProperty('--x', (Math.random() - 0.5) * 600);
-        fw.style.setProperty('--y', (Math.random() - 0.5) * 600);
-        fireworks.appendChild(fw);
-        setTimeout(() => fw.remove(), 1000);
-      }
     });
-  </script>
-</body>
+  </script></body>
 </html>
