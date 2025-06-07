@@ -13,57 +13,60 @@
       font-family: Arial, sans-serif;
       height: 100vh;
       overflow: hidden;
-    }
-    .container {
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
       align-items: center;
-      height: 100vh;
+      justify-content: flex-start;
+    }
+    .container {
+      width: 100%;
+      max-width: 600px;
+      margin-top: 20px;
       text-align: center;
       position: relative;
-      padding-top: 30px;
+      flex-shrink: 0;
     }
     .container img {
       width: 100%;
-      max-width: 600px;
       border-radius: 20px;
-      z-index: 1;
+      display: block;
+      margin: 0 auto;
     }
     .buttons {
       margin-top: 20px;
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 20px;
-      z-index: 3;
-      flex-wrap: wrap;
+      gap: 15px;
+      width: 100%;
+      max-width: 600px;
+      padding: 0 10px;
+      flex-shrink: 0;
       position: relative;
-      bottom: 30px;
+      z-index: 3;
     }
     button {
-      padding: 15px 30px;
+      padding: 15px 25px;
       font-size: 20px;
       border: none;
       border-radius: 10px;
       cursor: pointer;
-      min-width: 150px;
-      max-width: 200px;
-      transition: all 0.3s;
-      word-wrap: normal;
+      min-width: 140px;
+      max-width: 45vw;
+      word-wrap: break-word;
       white-space: normal;
+      user-select: none;
+      transition: all 0.3s ease;
     }
     #yesBtn {
       background-color: #4caf50;
       color: white;
-      z-index: 3;
       position: relative;
-      transition: left 0.3s ease;
+      left: 0;
     }
     #noBtn {
       background-color: #2196f3;
       color: white;
-      z-index: 3;
       position: relative;
     }
     .popup {
@@ -88,6 +91,9 @@
       animation: blink 0.6s infinite alternate;
       margin-top: 20px;
       text-align: center;
+      max-width: 90vw;
+      word-wrap: break-word;
+      white-space: normal;
     }
     @keyframes blink {
       from { opacity: 1; }
@@ -144,14 +150,16 @@
     }
 
     function adjustYesBtnPosition() {
-      // Se o botão Não estiver muito largo, empurra o Sim para a direita pra caber na tela
+      // Ajusta o botão Sim se o botão Não estiver grande demais para caber na tela
       const buttonsContainer = noBtn.parentElement;
       const totalWidth = buttonsContainer.offsetWidth;
-      const noBtnRight = noBtn.getBoundingClientRect().right;
+      const noBtnRect = noBtn.getBoundingClientRect();
+      const yesBtnWidth = yesBtn.offsetWidth;
       const viewportWidth = window.innerWidth;
 
-      if (noBtnRight + yesBtn.offsetWidth + 40 > viewportWidth) {
-        yesBtn.style.left = (viewportWidth - noBtnRight - yesBtn.offsetWidth - 40) + 'px';
+      if (noBtnRect.right + yesBtnWidth + 20 > viewportWidth) {
+        const overflow = noBtnRect.right + yesBtnWidth + 20 - viewportWidth;
+        yesBtn.style.left = `-${overflow}px`;
       } else {
         yesBtn.style.left = '0px';
       }
@@ -167,9 +175,10 @@
       popup.style.display = 'flex';
     });
 
-    // Ajusta posição ao carregar e redimensionar tela
     window.addEventListener('resize', adjustYesBtnPosition);
-    window.addEventListener('load', adjustYesBtnPosition);
+    window.addEventListener('load', () => {
+      adjustYesBtnPosition();
+    });
   </script>
 </body>
 </html>
