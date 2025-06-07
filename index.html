@@ -70,15 +70,14 @@
     }
     .speech-bubble {
       position: absolute;
-      bottom: 60px;
+      top: 60px; /* balão fica abaixo do botão */
+      right: 10px;
       background: #2196f3;
       color: white;
       padding: 10px 20px;
       border-radius: 20px;
       max-width: 300px;
       font-size: 18px;
-      left: auto;
-      right: 10px;
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.3s ease;
@@ -93,12 +92,11 @@
     .speech-bubble::after {
       content: "";
       position: absolute;
-      top: 100%;
+      bottom: 100%; /* seta fica em cima do balão */
       right: 20px;
       border-width: 10px;
       border-style: solid;
-      border-color: transparent transparent #2196f3 transparent;
-      transform: none;
+      border-color: transparent transparent #2196f3 transparent; /* seta azul apontando pra cima */
     }
     .popup {
       display: none;
