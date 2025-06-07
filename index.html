@@ -45,10 +45,11 @@
       border: none;
       border-radius: 10px;
       cursor: pointer;
-      min-width: 120px;
+      min-width: 150px;
+      max-width: 200px;
       transition: all 0.3s;
-      max-width: 40vw;
-      overflow-wrap: break-word;
+      word-wrap: normal;
+      white-space: normal;
     }
     #yesBtn {
       background-color: #4caf50;
@@ -59,7 +60,6 @@
       background-color: #2196f3;
       color: white;
       z-index: 3;
-      white-space: normal;
     }
     .popup {
       display: none;
@@ -125,11 +125,13 @@
       "Não resista aos encantos desse botão 🔵"
     ];
 
-    let msgIndex = 0;
+    function getRandomMessage() {
+      const randomIndex = Math.floor(Math.random() * messages.length);
+      return messages[randomIndex];
+    }
 
     function cycleMessage() {
-      noBtn.textContent = messages[msgIndex];
-      msgIndex = (msgIndex + 1) % messages.length;
+      noBtn.textContent = getRandomMessage();
     }
 
     noBtn.addEventListener('mouseenter', cycleMessage);
