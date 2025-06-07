@@ -17,11 +17,12 @@
     .container {
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
       height: 100vh;
       text-align: center;
       position: relative;
+      padding-top: 30px;
     }
     .container img {
       width: 100%;
@@ -30,10 +31,7 @@
       z-index: 1;
     }
     .buttons {
-      position: absolute;
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-50%);
+      margin-top: 20px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -58,7 +56,7 @@
       z-index: 3;
     }
     #noBtn {
-      background-color: #f44336;
+      background-color: #2196f3;
       color: white;
       z-index: 3;
       white-space: normal;
@@ -84,6 +82,7 @@
       font-size: 28px;
       animation: blink 0.6s infinite alternate;
       margin-top: 20px;
+      text-align: center;
     }
     @keyframes blink {
       from { opacity: 1; }
@@ -109,10 +108,21 @@
     const popup = document.getElementById('popup');
 
     const messages = [
-      "Opa!", "Tem certeza disso?", "Acho melhor pensar direito...",
-      "Dá uma chance pro amor ❤️", "Ui, que difícil ela!", "Não seja cruel comigo 😭",
-      "Fala que me quer logo!", "Me chama de botão e me aperta", "Vai me deixar na mão?",
-      "Dá logo esse negócio, mulher", "Resistência é inútil 😎"
+      "Opa!",
+      "Tem certeza disso?",
+      "Acho melhor pensar direito...",
+      "Está muito precipitada",
+      "Tente novamente mais tarde",
+      "Vai mesmo ficar regulando?",
+      "Dá logo esse negócio, mulher",
+      "Faz isso não comigo 😢",
+      "Não brinque com meu coração 💔",
+      "Vai se arrepender hein!",
+      "Me escolhe vai 🥺",
+      "A vida é curta demais pra dizer não",
+      "Topa que depois melhora! 😏",
+      "Diz sim logo, pô!",
+      "Não resista aos encantos desse botão 🔵"
     ];
 
     let msgIndex = 0;
