@@ -169,17 +169,55 @@
     const fireworks = document.getElementById('fireworks');
 
     const messages = [
-      "Opa", "Tem certeza disso?", "Acho melhor pensar direito",
-      "Está muito precipitada", "Tente novamente mais tarde",
-      "Vai mesmo ficar regulando?", "Dá logo esse negócio, mulher", "Não"
+      "Opa!",
+      "Tem certeza disso?",
+      "Acho melhor pensar direito...",
+      "Tá se fazendo de difícil 😏",
+      "Ainda dá tempo de mudar de ideia!",
+      "Tá se valorizando demais, hein?",
+      "Ui, que difícil ela!",
+      "Me dá só um pedacinho 😈",
+      "Tá fugindo por quê?",
+      "Vem cá, sua linda!",
+      "Se correr é pior 😼",
+      "Não foge do prazer!",
+      "Aceita logo vai...",
+      "Nem tá tudo isso 😜",
+      "Tá achando que é quem?",
+      "Me iludiu à toa...",
+      "Jura que vai dizer não?",
+      "Vai me deixar na mão?",
+      "Dá uma chance pro amor ❤️",
+      "Fingindo costume né?",
+      "É só um botãozinho inocente...",
+      "Resistência é inútil 😎",
+      "Fala que me quer logo!",
+      "Não finge que não gostou!",
+      "Ai que vontade de clicar em você 😩",
+      "Você me provoca 😳",
+      "Não seja tímida...",
+      "Dá uma clicadinha vai!",
+      "Faz isso comigo não!",
+      "Não? Jura mesmo? 🙄",
+      "Pense bem... MUITO bem...",
+      "Só mais uma tentativinha...",
+      "Tá calor aqui ou é você?",
+      "Fica não... Volta 😢",
+      "Coração partido 💔",
+      "Derrubei até o botão de tanto sofrer 🥹",
+      "Vamos conversar... sem roupa 🫣",
+      "Não seja cruel comigo 😭",
+      "Me chama de botão e me aperta",
+      "Não adianta correr 😼",
+      "Última chance hein...",
+      "Tá difícil resistir né?",
+      "Se clicar, promete não se apaixonar?",
+      "Dá esse botãozão gostoso!"
     ];
 
     let msgIndex = 0;
-    let floating = false;
 
     function moveNoBtn() {
-      floating = true;
-      noBtn.style.position = 'absolute';
       const parent = document.querySelector('.buttons');
       const maxX = parent.clientWidth - noBtn.offsetWidth;
       const maxY = parent.clientHeight - noBtn.offsetHeight;
@@ -193,10 +231,10 @@
       msgIndex++;
       if (msgIndex >= messages.length) {
         msgIndex = 0;
+        // Volta para posição original e texto "Não"
         noBtn.style.left = '';
         noBtn.style.top = '';
-        noBtn.style.position = 'absolute';
-        noBtn.textContent = messages[msgIndex];
+        noBtn.textContent = "Não";
       }
     }
 
