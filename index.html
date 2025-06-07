@@ -9,19 +9,23 @@
       box-sizing: border-box;
     }
 
-    body {
+    html, body {
+      margin: 0;
+      padding: 0;
       background-color: #111;
       color: #fff;
       font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-      overflow-x: hidden;
+      overflow: hidden; /* Impede rolagem */
     }
 
     .container {
-      margin-top: 30px;
-      padding: 0 16px;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 16px;
+      text-align: center;
     }
 
     .container img {
@@ -33,11 +37,13 @@
 
     .buttons {
       margin-top: 30px;
+      position: relative;
+      width: 100%;
+      max-width: 500px;
+      height: 80px;
       display: flex;
       justify-content: center;
-      gap: 16px;
-      flex-wrap: wrap;
-      position: relative;
+      align-items: center;
     }
 
     button {
@@ -48,17 +54,20 @@
       cursor: pointer;
       transition: 0.3s;
       min-width: 120px;
-      flex-shrink: 0;
+      z-index: 2;
     }
 
     #yesBtn {
       background-color: #4caf50;
       color: white;
+      position: relative; /* Fixo no layout */
+      margin-right: 16px;
     }
 
     #noBtn {
       background-color: #f44336;
       color: white;
+      position: absolute;
     }
 
     .popup {
@@ -166,16 +175,17 @@
     ];
 
     let msgIndex = 0;
-    let noBtnFloating = false;
+    let floating = false;
 
     function moveNoBtn() {
-      if (!noBtnFloating) {
-        noBtnFloating = true;
-        noBtn.style.position = 'absolute';
-      }
+      floating = true;
+      noBtn.style.position = 'absolute';
+      const parent = document.querySelector('.buttons');
+      const maxX = parent.clientWidth - noBtn.offsetWidth;
+      const maxY = parent.clientHeight - noBtn.offsetHeight;
 
-      const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
-      const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
       noBtn.style.left = `${x}px`;
       noBtn.style.top = `${y}px`;
       noBtn.textContent = messages[msgIndex];
@@ -185,8 +195,7 @@
         msgIndex = 0;
         noBtn.style.left = '';
         noBtn.style.top = '';
-        noBtn.style.position = 'static';
-        noBtnFloating = false;
+        noBtn.style.position = 'absolute';
         noBtn.textContent = messages[msgIndex];
       }
     }
