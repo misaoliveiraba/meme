@@ -52,13 +52,11 @@
     #yesBtn {
       background-color: #4caf50;
       color: white;
-      position: relative;
       z-index: 3;
     }
     #noBtn {
       background-color: #f44336;
       color: white;
-      position: relative;
       z-index: 3;
       white-space: nowrap;
     }
@@ -125,7 +123,7 @@
       const x = Math.random() * (viewportWidth - btnWidth);
       const y = Math.random() * (viewportHeight - btnHeight);
 
-      noBtn.style.position = 'absolute';
+      noBtn.style.position = 'fixed';
       noBtn.style.left = `${x}px`;
       noBtn.style.top = `${y}px`;
       noBtn.textContent = messages[msgIndex];
